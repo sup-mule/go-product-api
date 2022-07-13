@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: salsify-product-api
+  namespace: cc-demo
+spec:
+  selector:
+    matchLabels:
+      app: salsify-product-api
+  template:
+    metadata:
+      labels:
+        app: salsify-product-api
+    spec:
+      containers:
+      - name: salsify-product-api
+        image: acrrcgnaseplatform.azurecr.io/salsify-product-api:latest
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+          - mountPath: /data
+            name: data
+      imagePullSecrets: 
+      - name: acr
+      volumes:
+        - name: data
+          emptyDir: {}
+            
