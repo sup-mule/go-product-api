@@ -24,3 +24,8 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Env specific
+bin/
+salsify-product-api
+products.db

@@ -1,6 +1,9 @@
 package services
 
 import (
+	"os"
+	"path/filepath"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 
@@ -10,7 +13,10 @@ import (
 var DB *gorm.DB
 
 func ConnectDatabase() {
-	database, err := gorm.Open("sqlite3", "products.db")
+	dataDir := os.Getenv("DATA_DIR")
+	dbPath := filepath.Join(dataDir, "products.db")
+	
+	database, err := gorm.Open("sqlite3", dbPath)
 
 	if err != nil {
 		panic("Failed to connect to the database!")
