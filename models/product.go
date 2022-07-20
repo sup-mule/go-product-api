@@ -20,11 +20,11 @@ const (
 )
 
 type Product struct {
-	ProductID     int64         `json:"productID,omitempty" gorm:"primaryKey;autoIncrement;not null`
-	Name          string        `json:"name" gorm:"not null"`
-	Description   string        `json:"description" gorm:"not null"`
+	ProductID     int32         `json:"productID,omitempty" gorm:"primary_key;auto_increment;not_null"`
+	Name          string        `json:"name" gorm:"not_null"`
+	Description   string        `json:"description" gorm:"not_null"`
 	ProductStatus ProductStatus `json:"productStatus,omitempty"`
-	Sizes         Size          `json:"sizes,omitempty" gorm:"serializer:json"`
+	Sizes         Size          `json:"size,omitempty"`
 	Color         string        `json:"color,omitempty"`
 	ProductMSRP   float64       `json:"productMSRP,omitempty"`
 	ProductSKU    string        `json:"productSKU,omitempty"`

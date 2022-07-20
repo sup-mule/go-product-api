@@ -27,8 +27,8 @@ func GetAllProductsHandler() gin.HandlerFunc {
 
 func GetProductByIdHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		prodId, _ := strconv.ParseInt(c.Params.ByName("productId"), 0, 64)
-		if newProd, err := services.SelectProductByID(prodId); err != nil {
+		prodId, _ := strconv.ParseInt(c.Params.ByName("productId"), 0, 32)
+		if newProd, err := services.SelectProductByID(int32(prodId)); err != nil {
 			c.JSON(http.StatusNotFound, err.Error())
 		} else {
 			c.JSON(http.StatusOK, newProd)
@@ -55,8 +55,8 @@ func PutProductHandler() gin.HandlerFunc {
 		if shouldReturn {
 			return
 		}
-		prodId, _ := strconv.ParseInt(c.Param("productId"), 0, 64)
-		if err := services.UpdateProduct(&productToUpdate, prodId); err != nil {
+		prodId, _ := strconv.ParseInt(c.Param("productId"), 0, 32)
+		if err := services.UpdateProduct(&productToUpdate, int32(prodId)); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}

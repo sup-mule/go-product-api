@@ -40,18 +40,18 @@ func SelectAllProducts() []models.Product {
 	return products
 }
 
-func SelectProductByID(id int64) (models.Product, error) {
+func SelectProductByID(productId int32) (models.Product, error) {
 	var product models.Product
-	err := DB.First(&product, id).Error
+	err := DB.First(&product, productId).Error
 	return product, err
 }
 
-func InsertNewProduct(product *models.Product) int64 {
+func InsertNewProduct(product *models.Product) int32 {
 	DB.Create(&product)
 	return product.ProductID
 }
 
-func UpdateProduct(product *models.Product, productId int64) error {
+func UpdateProduct(product *models.Product, productId int32) error {
 	var curProduct models.Product
 	if err := DB.First(&curProduct, productId).Error; err != nil {
 		return err
