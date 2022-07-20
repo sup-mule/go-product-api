@@ -20,7 +20,7 @@ const (
 )
 
 type Product struct {
-	ID            int64         `json:"id,omitempty" gorm:"primaryKey;autoIncrement;not null`
+	ProductID     int64         `json:"productID,omitempty" gorm:"primaryKey;autoIncrement;not null`
 	Name          string        `json:"name" gorm:"not null"`
 	Description   string        `json:"description" gorm:"not null"`
 	ProductStatus ProductStatus `json:"productStatus,omitempty"`

@@ -15,7 +15,7 @@ var DB *gorm.DB
 func ConnectDatabase() {
 	dataDir := os.Getenv("DATA_DIR")
 	dbPath := filepath.Join(dataDir, "products.db")
-	
+
 	database, err := gorm.Open("sqlite3", dbPath)
 
 	if err != nil {
@@ -48,7 +48,7 @@ func SelectProductByID(id int64) (models.Product, error) {
 
 func InsertNewProduct(product *models.Product) int64 {
 	DB.Create(&product)
-	return product.ID
+	return product.ProductID
 }
 
 func UpdateProduct(product *models.Product, productId int64) error {
