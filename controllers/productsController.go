@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"sync/atomic"
 
 	"github.com/gin-gonic/gin"
 	"mulesoft.org/salsify-product-api/models"
@@ -43,7 +44,9 @@ func PostProductHandler() gin.HandlerFunc {
 		if shouldReturn {
 			return
 		}
-		newID := services.InsertNewProduct(&newProduct)
+		newID := atomic.AddUint32(&models.IdCounter, 1)
+		newProduct.ProductID = strconv.FormatUint(uint64(newID), 10)
+		services.InsertNewProduct(&newProduct)
 		c.Header("Location", fmt.Sprintf("/api/products/%v", newID))
 		c.Status(http.StatusCreated)
 	}

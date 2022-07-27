@@ -4,9 +4,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
-
+	"gorm.io/gorm"
+	"gorm.io/driver/sqlite"
+	
 	"mulesoft.org/salsify-product-api/models"
 )
 
@@ -16,7 +16,7 @@ func ConnectDatabase() {
 	dataDir := os.Getenv("DATA_DIR")
 	dbPath := filepath.Join(dataDir, "products.db")
 
-	database, err := gorm.Open("sqlite3", dbPath)
+	database, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{})
 
 	if err != nil {
 		panic("Failed to connect to the database!")
@@ -46,7 +46,7 @@ func SelectProductByID(productId int32) (models.Product, error) {
 	return product, err
 }
 
-func InsertNewProduct(product *models.Product) int32 {
+func InsertNewProduct(product *models.Product) string {
 	DB.Create(&product)
 	return product.ProductID
 }
