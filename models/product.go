@@ -13,7 +13,7 @@ const (
 
 const (
 	XS   Size = "XS"
-	S    Size = "s"
+	S    Size = "S"
 	M    Size = "M"
 	L    Size = "L"
 	XL   Size = "XL"
