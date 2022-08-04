@@ -4,9 +4,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"gorm.io/gorm"
 	"gorm.io/driver/sqlite"
-	
+	"gorm.io/gorm"
 	"mulesoft.org/salsify-product-api/models"
 )
 
@@ -40,9 +39,9 @@ func SelectAllProducts() []models.Product {
 	return products
 }
 
-func SelectProductByID(productId int32) (models.Product, error) {
+func SelectProductByID(productId string) (models.Product, error) {
 	var product models.Product
-	err := DB.First(&product, productId).Error
+	err := DB.First(&product, "product_id = ?", productId).Error
 	return product, err
 }
 
@@ -51,9 +50,9 @@ func InsertNewProduct(product *models.Product) string {
 	return product.ProductID
 }
 
-func UpdateProduct(product *models.Product, productId int32) error {
+func UpdateProduct(product *models.Product, productId string) error {
 	var curProduct models.Product
-	if err := DB.First(&curProduct, productId).Error; err != nil {
+	if err := DB.First(&curProduct, "product_id = ?", productId).Error; err != nil {
 		return err
 	}
 	DB.Model(&curProduct).Updates(product)

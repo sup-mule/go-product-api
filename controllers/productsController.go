@@ -3,7 +3,6 @@ package controllers
 import (
 	"fmt"
 	"net/http"
-	"strconv"
 	"sync/atomic"
 
 	"github.com/gin-gonic/gin"
@@ -28,8 +27,8 @@ func GetAllProductsHandler() gin.HandlerFunc {
 
 func GetProductByIdHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		prodId, _ := strconv.ParseInt(c.Params.ByName("productId"), 0, 32)
-		if newProd, err := services.SelectProductByID(int32(prodId)); err != nil {
+		prodId := c.Params.ByName("productId")
+		if newProd, err := services.SelectProductByID(prodId); err != nil {
 			c.JSON(http.StatusNotFound, err.Error())
 		} else {
 			c.JSON(http.StatusOK, newProd)
@@ -45,7 +44,7 @@ func PostProductHandler() gin.HandlerFunc {
 			return
 		}
 		newID := atomic.AddUint32(&models.IdCounter, 1)
-		newProduct.ProductID = strconv.FormatUint(uint64(newID), 10)
+		newProduct.ProductID = fmt.Sprintf("PRD%03d", newID)
 		services.InsertNewProduct(&newProduct)
 		c.Header("Location", fmt.Sprintf("/api/products/%v", newID))
 		c.Status(http.StatusCreated)
@@ -58,8 +57,8 @@ func PutProductHandler() gin.HandlerFunc {
 		if shouldReturn {
 			return
 		}
-		prodId, _ := strconv.ParseInt(c.Param("productId"), 0, 32)
-		if err := services.UpdateProduct(&productToUpdate, int32(prodId)); err != nil {
+		prodId := c.Param("productId")
+		if err := services.UpdateProduct(&productToUpdate, prodId); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
