@@ -46,7 +46,7 @@ func PostProductHandler() gin.HandlerFunc {
 		newID := atomic.AddUint32(&models.IdCounter, 1)
 		newProduct.ProductID = fmt.Sprintf("PRD%03d", newID)
 		services.InsertNewProduct(&newProduct)
-		c.Header("Location", fmt.Sprintf("/api/products/%v", newID))
+		c.Header("Location", fmt.Sprintf("/api/products/%v", newProduct.ProductID))
 		c.Status(http.StatusCreated)
 	}
 }

@@ -13,7 +13,7 @@ func main() {
 
 	// Health check route
 	router.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"api": "Composable Commerce Product API", "version": "1.0.10"})
+		c.JSON(http.StatusOK, gin.H{"api": "Composable Commerce Product API", "version": "1.0.11"})
 	})
 
 	// Product Routes

@@ -3,7 +3,7 @@ package models
 type ProductStatus string
 type Size string
 
-var IdCounter uint32 = 1
+var IdCounter uint32 = 6
 
 const (
 	Available    ProductStatus = "available"
