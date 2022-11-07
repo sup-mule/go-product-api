@@ -25,10 +25,11 @@ The built container can be run locally as follows:
 
 First step is to build and push the container to a container registry that can be accessed from a K8s cluster.
 
-Under the K8s directory there is a sample deployment and service files. The deployment definition needs the path to the container image. It can be installed using the following sample commands. Note that the example puts all the data in an **emptyDir** mount which means all the data is reset if the application is restarted.
+Under the K8s directory there is a sample deployment and service files. The deployment definition needs the path to the container image published from above step. It can be installed using the following sample commands. Note that the example puts all the data in an **emptyDir** mount which means all the data is reset if the application is restarted.
 
-- `kubectl create -f k8s/deployment.yaml -n <namespace>`
-- `kubectl create -f k8s/service.yaml -n <namespace>`
+- `kubectl create ns cc-demo`
+- `kubectl create -f k8s/deployment.yaml`
+- `kubectl create -f k8s/service.yaml`
 
 ## Open API Spec
 
