@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: salsify-product-api
+  name: go-product-api
   namespace: cc-demo
 spec:
   selector:
     matchLabels:
-      app: salsify-product-api
+      app: go-product-api
   template:
     metadata:
       labels:
-        app: salsify-product-api
+        app: go-product-api
     spec:
       containers:
-      - name: salsify-product-api
-        image: acrrcgnaseplatform.azurecr.io/salsify-product-api:latest
+      - name: go-product-api
+        image: <Built Container Image here>
         livenessProbe:
           httpGet:
             path: /

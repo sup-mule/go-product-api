@@ -27,5 +27,6 @@ Temporary Items
 
 # Env specific
 bin/
-salsify-product-api
+go-product-api
 products.db
+.dccache

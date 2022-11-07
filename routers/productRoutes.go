@@ -2,7 +2,7 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	"mulesoft.org/salsify-product-api/controllers"
+	"mulesoft.org/go-product-api/controllers"
 )
 
 func ProductRoutes(g *gin.RouterGroup) {

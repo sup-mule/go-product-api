@@ -1,4 +1,4 @@
-module mulesoft.org/salsify-product-api
+module mulesoft.org/go-product-api
 
 go 1.18
 

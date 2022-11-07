@@ -6,7 +6,7 @@ import (
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"mulesoft.org/salsify-product-api/models"
+	"mulesoft.org/go-product-api/models"
 )
 
 var DB *gorm.DB

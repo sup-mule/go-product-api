@@ -1,0 +1,159 @@
+openapi: "3.0.3"
+info:
+  version: 1.0.0
+  title: Demo Product System API
+  description: System API for Salsify PIM 
+components:
+  schemas:
+    ProductResponse:
+      type: object
+      description: Data model for Salsify PIM for product.
+      required:
+        - productID
+        - name
+        - description
+      properties:
+        productID:
+          type: string
+          description: Id of the product
+          example: "1234"
+        name:
+          type: string
+          example: M-Shield Logo T-Shirt
+        description:
+          type: string
+          example: Unisex M-Shield T-shirt Blue Logo
+        productStatus:
+          type: string
+          example: available
+          enum:
+            - available
+            - backordered
+            - discontinued
+        size:
+          type: string
+          example: M
+          enum:
+            - XS
+            - S
+            - M
+            - L
+            - XL
+            - XXL
+            - XXXL
+        color:
+          type: string
+          example: Heather Navy
+        productMSRP:
+          type: number
+          format: double
+          example: 20.00
+        productSKU:
+          type: string
+          example: MSH-TS-HN-M
+    ProductRequest:
+      type: object
+      description: Data model for Salsify PIM for product.
+      required:
+        - name
+        - description
+      properties:
+        name:
+          type: string
+          example: M-Shield Logo T-Shirt
+        description:
+          type: string
+          example: Unisex M-Shield T-shirt Blue Logo
+        productStatus:
+          type: string
+          example: available
+          enum:
+            - available
+            - backordered
+            - discontinued
+        size:
+          type: string
+          example: M
+          enum:
+            - XS
+            - S
+            - M
+            - L
+            - XL
+            - XXL
+            - XXXL
+        color:
+          type: string
+          example: Heather Navy
+        productMSRP:
+          type: number
+          format: double
+          example: 20.00
+        productSKU:
+          type: string
+          example: MSH-TS-HN-M
+paths:
+  /products:
+    get:
+      responses:
+        '200':
+          description: Operation Successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductResponse'
+    post:
+      description: Create a new product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+      responses:
+        '201':
+          headers:
+            Location:
+              description: Relative path of the created resource
+              schema:
+                type: string
+          description: Created new product
+  /products/{productID}:
+    get:
+      parameters:
+      - name: productID
+        in: path
+        required: true
+        description: ID of the product to return
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '404':
+          description: Product with ID not found
+    put:
+      responses:
+        '200':
+          description: Product updated
+          headers:
+            Location:
+              description: Relative path of the created resource
+              schema:
+                type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+    delete:
+      responses:
+        '200':
+          description: Delete operation successful

@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"mulesoft.org/salsify-product-api/routers"
-	"mulesoft.org/salsify-product-api/services"
+	"mulesoft.org/go-product-api/routers"
+	"mulesoft.org/go-product-api/services"
 )
 
 func main() {

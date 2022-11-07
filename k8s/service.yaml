@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: salsify-product-api
+  name: go-product-api
   namespace: cc-demo
 spec:
   selector:
-    app: salsify-product-api
+    app: go-product-api
   ports:
   - port: 80
     targetPort: 8080

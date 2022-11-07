@@ -4,9 +4,9 @@ WORKDIR /build
 RUN apk add build-base
 RUN go build
 FROM alpine:3.16 as DEPLOY
-COPY --from=BUILD /build/salsify-product-api /
+COPY --from=BUILD /build/go-product-api /
 VOLUME [ "/data" ]
 ENV DATA_DIR=/data
 ENV GIN_MODE=release
-CMD [ "/salsify-product-api" ]
+CMD [ "/go-product-api" ]
 EXPOSE 8080

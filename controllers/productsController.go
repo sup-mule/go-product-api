@@ -6,8 +6,8 @@ import (
 	"sync/atomic"
 
 	"github.com/gin-gonic/gin"
-	"mulesoft.org/salsify-product-api/models"
-	"mulesoft.org/salsify-product-api/services"
+	"mulesoft.org/go-product-api/models"
+	"mulesoft.org/go-product-api/services"
 )
 
 func validatePayload(c *gin.Context) (models.Product, bool) {
