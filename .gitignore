@@ -30,3 +30,6 @@ bin/
 go-product-api
 products.db
 .dccache
+
+#VS Code 
+.vscode/
