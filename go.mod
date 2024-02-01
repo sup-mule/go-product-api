@@ -1,6 +1,6 @@
 module mulesoft.org/go-product-api
 
-go 1.20.13
+go 1.20
 
 require (
 	github.com/gin-gonic/gin v1.9.1
