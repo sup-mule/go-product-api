@@ -9,6 +9,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
+	"go.opentelemetry.io/otel/propagation"
 	"mulesoft.org/go-product-api/routers"
 	"mulesoft.org/go-product-api/services"
 )
@@ -22,7 +23,7 @@ func main() {
 	// Setup OpenTelemetry
 	sName := "go-product-api"
 	sVersion := "1.0.12"
-	otelShutdown, err := setupOTelSDK(ctx, sName, sVersion)
+	otelShutdown, err := initTracer(ctx, sName, sVersion)
 	if err != nil {
 		return
 	}
@@ -32,7 +33,7 @@ func main() {
 	}()
 
 	router := gin.Default()
-	router.Use(otelgin.Middleware(sName))
+	router.Use(otelgin.Middleware(sName, otelgin.WithPropagators(propagation.TraceContext{})))
 
 	// Health check route
 	router.GET("/", func(c *gin.Context) {

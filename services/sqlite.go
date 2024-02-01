@@ -4,7 +4,6 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/uptrace/opentelemetry-go-extra/otelgorm"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"mulesoft.org/go-product-api/models"
@@ -20,10 +19,6 @@ func ConnectDatabase() {
 
 	if err != nil {
 		panic("Failed to connect to the database!")
-	}
-
-	if err := database.Use(otelgorm.NewPlugin()); err != nil {
-		panic(err)
 	}
 
 	database.AutoMigrate(&models.Product{})
