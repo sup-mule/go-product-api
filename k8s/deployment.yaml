@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: go-product-api
-  namespace: cc-demo
 spec:
   selector:
     matchLabels:
@@ -14,15 +13,10 @@ spec:
     spec:
       containers:
       - name: go-product-api
-        image: <Built Container Image here>
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 8080
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 8080
+        image: supadhyaya969/go-product-api:latest
+        env:
+        - name: OTEL_COLLECTOR_URL
+          value: otel-http-service.otel.svc.cluster.local
         imagePullPolicy: Always
         resources:
           limits:
@@ -33,8 +27,6 @@ spec:
         volumeMounts:
           - mountPath: /data
             name: data
-      imagePullSecrets: 
-      - name: acr
       volumes:
         - name: data
           emptyDir: {}
